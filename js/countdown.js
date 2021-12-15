@@ -2,7 +2,6 @@ const countDown = data => new CountDown(data);
 class CountDown {
   constructor(data) {
     this.data = data;
-    this.timeZone = data['timeZone'] ?? Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.data['results'] = data['results'] ?? false;
     this.data['events'] = data['events'] ?? false;
     if (this.data['events']?.length > 0) {
@@ -12,7 +11,7 @@ class CountDown {
     }
   }
   getAllTimesDifference() {
-    var now = new Date(new Date().toLocaleString('en', {timeZone: this.timeZone}));
+    var now = new Date(new Date().toLocaleString('en', {timeZone: this.data['timeZone']}));
     var nextTimes = [];
     this.data['events'].map((time, index)  => {
       var theTime = this.time(index, now.getDate()) - now;
@@ -39,12 +38,15 @@ class CountDown {
     msec -= mm * 1000 * 60;
     var ss = Math.floor(msec / 1000);
     msec -= ss * 1000;
+   this.printTime(yy, mo, dd, hh, mm, ss);
+  }
+  printTime(yy, mo, dd, hh, mm, ss) {
     var yearsArr = this.data['results']['years']?.length ? [...this.data['results']['years']] : [this.data['results']['years']],
-      monthsArr = this.data['results']['months']?.length ? [...this.data['results']['months']] : [this.data['results']['months']],
-      daysArr = this.data['results']['days']?.length ? [...this.data['results']['days']] : [this.data['results']['days']],
-      hoursArr = this.data['results']['hours']?.length ? [...this.data['results']['hours']] : [this.data['results']['hours']],
-      minutesArr = this.data['results']['minutes']?.length ? [...this.data['results']['minutes']] : [this.data['results']['minutes']],
-      secondsArr = this.data['results']['seconds']?.length ? [...this.data['results']['seconds']] : [this.data['results']['seconds']];
+    monthsArr = this.data['results']['months']?.length ? [...this.data['results']['months']] : [this.data['results']['months']],
+    daysArr = this.data['results']['days']?.length ? [...this.data['results']['days']] : [this.data['results']['days']],
+    hoursArr = this.data['results']['hours']?.length ? [...this.data['results']['hours']] : [this.data['results']['hours']],
+    minutesArr = this.data['results']['minutes']?.length ? [...this.data['results']['minutes']] : [this.data['results']['minutes']],
+    secondsArr = this.data['results']['seconds']?.length ? [...this.data['results']['seconds']] : [this.data['results']['seconds']];
     if (this.data['results']['years']) yearsArr.map(item => item.innerHTML = yy < 10 ? `0${yy} - ` : `${yy} - `);
     if (this.data['results']['months']) monthsArr.map(item => item.innerHTML = mo < 10 ? `0${mo} - ` : `${mo} - `);
     if (this.data['results']['days']) daysArr.map(item => item.innerHTML = dd < 10 ? `0${dd} ` : `${dd} `);
