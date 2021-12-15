@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Count Down</title>
+</head>
+<body>
+  <div class="event">
+    <div class="h1" id="eventLabelDiv" class="label"></div>
+    <div class="times">
+      <div id="hoursDiv" class="hour"></div>
+      <div id="minutesDiv" class="minute"></div>
+      <div id="secondsDiv" class="second"></div>
+    </div>
+  </div>
+  <div class="event">
+    <div class="h1" id="secEventLabel" class="label"></div>
+    <div class="times">
+      <div id="secYears" class="year"></div>
+      <div id="secMonths" class="month"></div>
+      <div id="secDays" class="day" style="margin-right: 40px;"></div>
+      <div id="secHours" class="hour"></div>
+      <div id="secMinutes" class="minute"></div>
+      <div id="secSeconds" class="second"></div>
+    </div>
+  </div>
+ 
+  <script src="js/countdown.js"></script>
+  <script>
+    countDown({
+      events: [
+        {label: 'FAJR', time: '05:13'},
+        {label: 'SHURUQ', time: '6:43'},
+        {label: 'DHUHR', time: '11:51'},
+        {label: 'ASSR', time: '14:38'},
+        {label: 'MAGHRIB', time: '16:57'},
+        {label: 'ISHAA', time: '18:20'},
+      ],
+      results: {
+        hours: hoursDiv, 
+        minutes: minutesDiv, 
+        seconds: secondsDiv, 
+        eventLabel: eventLabelDiv
+      }
+    });
+    countDown({
+      events: [
+        {label: 'Travel 1', time: '2023-02-19 6:13'},
+        {label: 'Travel 2', time: '2024-02-19 05:13'},
+      ],
+      results: {
+        years: secYears, 
+        months: secMonths, 
+        days: secDays, 
+        hours: secHours, 
+        minutes: secMinutes, 
+        seconds: secSeconds, 
+        eventLabel: secEventLabel,
+      }
+    });
+  </script>
+</body>
+</html>
